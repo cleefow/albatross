@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>albatross</title>
+<script type="text/javascript" src="{{urlroot}}/scripts/shCore.js"></script>
+<script type="text/javascript" src="{{urlroot}}/scripts/shBrush{{content.Brush}}.js"></script>
+<link type="text/css" rel="stylesheet" href="{{urlroot}}/styles/shCoreDefault.css"/>
+<link rel="icon" href="{{urlroot}}/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="{{urlroot}}/favicon.ico" type="image/x-icon" />
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+<body style="background: white; font-family: Helvetica">
+<div class="path container">
+{% for item in path -%}
+{%- if item.name -%}
+/
+{%- endif -%}
+<a href="{{item.link}}">
+{%- if item.name -%}
+{{item.name}}
+{%- else -%}
+<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M16 9L13 6V2H11v2L8 1 0 9h2l1 5c0 0.55 0.45 1 1 1h8c0.55 0 1-0.45 1-1l1-5h2zM12 14H9V10H7v4H4l-1.19-6.31 5.19-5.19 5.19 5.19-1.19 6.31z" /></svg>
+{%- endif -%}
+</a>
+{%- endfor -%}
+</div>
+
+<div class="container">
+{% if content.status == 'OK' %}
+<pre class="brush: {{content.brush}}; toolbar: false;">
+{{content.html}}
+</pre>
+{% else %}
+<div class="container-error">
+{{content.error}}
+</div>
+{% endif %}
+</div>
+</body>
+</html>

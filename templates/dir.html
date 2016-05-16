@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>albatross</title>
+<link rel="icon" href="{{urlroot}}/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="{{urlroot}}/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<div class="path container">
+{% for item in path -%}
+<a href="{{item.link}}">
+{%- if item.name -%}
+{{item.name}}
+{%- else -%}
+<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M16 9L13 6V2H11v2L8 1 0 9h2l1 5c0 0.55 0.45 1 1 1h8c0.55 0 1-0.45 1-1l1-5h2zM12 14H9V10H7v4H4l-1.19-6.31 5.19-5.19 5.19 5.19-1.19 6.31z" /></svg>
+{%- endif -%}
+</a>/
+{%- endfor -%}
+</div>
+
+<div class="container">
+<table class="files js-navigation-container">
+<tr class="js-navigation-head">
+<th class="icon"></th>
+<th class="filename">Name</th>
+<th class="size">Size</th>
+<th class="age">Last Modified Time</th>
+</tr>
+{% for item in files %}
+<tr class="js-navigation-item">
+<td class="icon">
+{%- if item.isdir -%}
+<svg width="14" viewBox="0 0 14 16" version="1.1" height="16" class="" aria-hidden="true"><path d="M13 4H7v-1c0-0.66-0.31-1-1-1H1c-0.55 0-1 0.45-1 1v10c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V5c0-0.55-0.45-1-1-1z m-7 0H1v-1h5v1z"/></svg>
+{%- else -%}
+<svg width="12" viewBox="0 0 12 16" version="1.1" height="16" class="octicon octicon-file-text" aria-hidden="true"><path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"/></svg>
+{%- endif %}
+</td>
+<td class="filename">
+<a href="{{item.link}}">{{item.name}}</a>
+</td>
+<td class="size">{{item.size}}</td>
+<td class="age">{{item.mtime}}</td>
+</tr>
+{% else %}
+<tr class="js-navigation-err">
+nothing
+</tr>
+{% endfor %}
+</table>
+</div>
+</body>
+</html>
